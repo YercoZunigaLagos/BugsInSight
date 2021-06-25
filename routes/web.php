@@ -23,15 +23,14 @@ Auth::routes(['verify' => true]);
 
 Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'store'])->name('registrar');
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+//para el login y link de dashboard
 Route::group(['middleware' => ['auth']], function() {
-    Route::get('/home', 'App\Http\Controllers\DashboardController@index')->name('home');
+    Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('home');
 });
 
 // para usuarios
 Route::group(['middleware' => ['auth', 'role:user']], function() {
-    Route::get('/dashboard/proyectos', 'App\Http\Controllers\DashboardController@proyectos')->name('dashboard.myprofile');
+    Route::get('/dashboard/proyectos', 'App\Http\Controllers\DashboardController@proyectos')->name('misProyectos');
 });
 
 // for managers
